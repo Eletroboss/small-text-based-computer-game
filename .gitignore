@@ -53,3 +53,7 @@ dkms.conf
 
 # Visual studio
 .vs/
+
+# Compiler leftovers
+2
+3
