@@ -13,7 +13,7 @@ go to build
 run make.bat
 binaries will compile in bin
 
-To compile for Linux:
+To compile for UNIX:
 Install gcc (sudo apt-get install gcc) (usually pre-installed)
 go to build
 run make.sh
