@@ -1,11 +1,1 @@
-To build under UNIX:
-Install gcc by running "sudo apt-get install gcc"
-Run the sh file under build
-The binary can be found under bin
-
-To build under Windows:
-Install visual studio and the "Desktop development with C++" payload
-In the developer command prompt, run the batch file under build
-The binary will be compiled under bin
-
-Please note that pre-compiled binaried can be found under bin
+SEE README.md
