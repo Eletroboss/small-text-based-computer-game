@@ -1,6 +1,11 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\build",
+    "\\filesUNIX",
+    "\\filesWin",
+    "\\maps"
   ],
+  "SelectedNode": "\\main.c",
   "PreviewInSolutionExplorer": false
 }
