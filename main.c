@@ -26,7 +26,7 @@ const int waitMS = 40;
 
 const int defpos[2] = { 1,1 };
 const int bonuslines = 2;
-const int levelmax = 3;
+const int levelmax = 4;
 const int LWinc = 1;
 
 int pos[2] = {1,1};

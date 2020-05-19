@@ -26,6 +26,15 @@ basemap = ["""\
 ########
 ########
 ########
+""","""\
+########
+######0#
+########
+####%%%#
+###%&%%#
+######%#
+##%%%%%#
+########
 """]
 colmap = ["""\
 rrrrrrrr
@@ -54,6 +63,15 @@ r rRgR r
 r rrrr r
 r      r
 rrrrrrrr
+""","""\
+rrrrrrrr
+r r   gr
+r   rrrr
+r rrRRRr
+r rRgRRr
+r rrrrRr
+r RRRRRr
+rrrrrrrr
 """]
 
 basemap2 = [[' ']*8*9 for x in range(len(basemap))]
@@ -80,13 +98,13 @@ for x in range(len(basemap2)):
     basemap3 += "\",\""
     colmap3 += "\",\""
 
-CSource = "const char basemap["+str(len(basemap))+"]["+str(8*9)+"]={\""
+CSource = "const char basemap["+str(len(basemap))+"][500]={\""
 CSource += basemap3[:-3]
-CSource += "\"};const char colmap["+str(len(colmap))+"]["+str(8*9)+"]={\""
+CSource += "\"};const char colmap["+str(len(colmap))+"][500]={\""
 CSource += colmap3[:-3]
 CSource += "\"};"
 print(CSource)
 
-file = open(r"C:\Users\Willi\Dropbox\Documents\programming\C\to be renamed\maps\maps.c","w")
+file = open(r"C:\Users\Willi\Dropbox\Documents\programming\C\github\small-text-based-video-game\maps\maps.c","w")
 file.write(CSource)
 file.close()
