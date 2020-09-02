@@ -36,6 +36,7 @@ int STOPCODE = 128;
 int coins = 0;
 
 char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
+char colmap2[72];
 char map[500]; // Size needed unknown.
 
 int main ()
@@ -160,7 +161,7 @@ int draw ()
 		printf("\033[A");
 	}
 	printf("%s\033[0m\n",map);
-	printf("Coins: %d\n\033[0;30m", coins);
+	printf("Coins: %d  \n\033[0;30m", coins);
 
 	return 0;
 }
@@ -170,13 +171,15 @@ int updatemap ()
 	for (int i=0;i<=LHEIGHT*(LWIDTH+LWinc);i++)
 	{
 		map2[i] = basemap[level][i];
+		colmap2[i] = colmap[level][i];
 	}
 	map2[mappos()] = '@';
+	colmap2[mappos()] = ' ';
 	
 	int j = 0;
 	for (int i=0;i<=LHEIGHT*(LWIDTH+LWinc);i++)
 	{
-		switch (colmap[level][i])
+		switch (colmap2[i])
 		{
 		case 'r':
 			map[j] = '\033';j++;
