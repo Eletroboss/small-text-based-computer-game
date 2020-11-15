@@ -26,19 +26,19 @@ const int waitMS = 40;
 
 const int defpos[2] = { 1,1 };
 const int bonuslines = 2;
-const int levelmax = 4;
+const int levelmax = 5;
 const int LWIDTH = 8;
 const int LHEIGHT = 8;
 
 char currentTile;
 char currentColour;
 
-int pos[2] = {1,1};
-int level = 0;
-int STOP = 0;
-int STOPCODE = 128;
-int coins = 0;
-int SEECRET = 0;
+unsigned int pos[2] = {1,1};
+unsigned int level = 0;
+unsigned int STOP = 0;
+unsigned int STOPCODE = 128;
+unsigned int coins = 0;
+unsigned int SEECRET = 0;
 
 char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
 char colmap2[72];
@@ -134,6 +134,7 @@ int main ()
 		if (currentColour == 'g' && currentTile == '&')
 		{
 			level++;
+			coins = 0;
 			pos[0] = defpos[0];
 			pos[1] = defpos[1];
 			if (level>=levelmax)
@@ -181,7 +182,7 @@ int draw ()
 	}
 	else
 	{
-		printf("Coins: %d  \n\033[0;30m", coins);
+		printf("Coins: %d                           \n\033[0;30m", coins);
 	}
 
 	return 0;

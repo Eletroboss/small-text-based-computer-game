@@ -32,12 +32,3 @@ char colmap(int x,int y)
 
   return colmapString[x*64+y];
 }
-/* for testing
-int main()
-{
-  int x = basemap(0, 3);
-  printf("%c", x);
-
-  return 0;
-}
-*/
