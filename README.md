@@ -1,5 +1,5 @@
 <h1>Running</h1>
-<p>Please note that these binaries are compiled for x86_64. You will have to build yourself if you are using a 32-bit machine. For building, see <a id="#building">here</a></p>
+<p>Please note that these binaries are compiled for x86_64. You will have to build yourself if you are using a 32-bit machine. For building, see <a href="#building">here</a>.</p>
 <h2>All:</h2>
 <p>Please download both basemap.dat and colmap.dat from the release you want to use (v1.2.0+).<br />For 2 player support, please download 2Player.sh (v2.0.0+). For details on how to run in 2 player mode, please see <a href="#2p">below</a>.</p>
 <h2>UNIX:</h2>
