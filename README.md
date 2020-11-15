@@ -19,8 +19,10 @@
 <ul>
    <li>Run 2Player.sh with the username and ip/hostname of the local machine you're connecting to. E.G.:<br />./2Player.sh user@192.168.x.x<br />NOTE: you need password-less ssh access to the maching you're connecting to. Details on how to do this can be found <a href="http://www.linuxproblem.org/art_9.html">here</a>.</li>
    <li>Run main.o or main.exe with 1 or more arguments like so:</li>
-   `./main.o 1`
-   `main.exe 1`
+   ```
+   ./main.o 1
+   main.exe 1
+   ```
 </ul>
 <p>Please note that 2 player mode is in development and very buggy and slow.</p>
 <h1 id="building">Building</h1>
