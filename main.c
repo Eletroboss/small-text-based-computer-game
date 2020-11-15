@@ -9,6 +9,7 @@
 #endif
 
 #include "maps/main.c"
+#include "2Player.c"
 
 int draw();
 int updatemap();
@@ -37,15 +38,18 @@ unsigned int pos[2] = {1,1};
 unsigned int level = 0;
 unsigned int STOP = 0;
 unsigned int STOPCODE = 128;
-unsigned int coins = 0;
 unsigned int SEECRET = 0;
+unsigned int p2 = 0;
+
+signed int coins = 0;
 
 char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
 char colmap2[72];
 char map[500]; // Size needed unknown.
 
-int main ()
+int main (int argc, char* argv[])
 {
+  p2 = argc;
 #ifdef _WIN32
 	setupConsole();
 #endif
@@ -59,6 +63,10 @@ int main ()
 	
 	while (1)
 	{
+    if (p2 >= 2)
+    {
+      send1pPos(mappos(1));
+    }
 		if (STOP)
 		{
 			return STOPCODE;
@@ -202,8 +210,14 @@ int updatemap ()
 			colmap2[i+j] = '\n';
 		}
 	}
-	map2[mappos(1)] = '@';
-	colmap2[mappos(1)] = ' ';
+  
+  map2[mappos(1)] = '@';
+  colmap2[mappos(1)] = ' ';
+  if (p2 >= 2)
+  {
+    map2[get2pPos()] = '@';
+    colmap2[get2pPos()] = 'g';
+  }
 	
 	j = 0;
 	for (int i=0;i<=LHEIGHT*(LWIDTH+1);i++)
