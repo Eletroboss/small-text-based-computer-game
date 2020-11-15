@@ -27,13 +27,18 @@ const int waitMS = 40;
 const int defpos[2] = { 1,1 };
 const int bonuslines = 2;
 const int levelmax = 4;
-const int LWinc = 1;
+const int LWIDTH = 8;
+const int LHEIGHT = 8;
+
+char currentTile;
+char currentColour;
 
 int pos[2] = {1,1};
 int level = 0;
 int STOP = 0;
 int STOPCODE = 128;
 int coins = 0;
+int SEECRET = 0;
 
 char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
 char colmap2[72];
@@ -69,11 +74,12 @@ int main ()
 #else
 			x = getchar();
 #endif
+
 			switch (x)
 			{
 			case 'w':
 				pos[1]--;
-				if (colmap[level][mappos()] == 'r')
+				if (colmap(level, mappos(0)) == 'r')
 				{
 					pos[1]++;
 				}
@@ -81,7 +87,7 @@ int main ()
 
 			case 'a':
 				pos[0]--;
-				if (colmap[level][mappos()] == 'r')
+				if (colmap(level, mappos(0)) == 'r')
 				{
 					pos[0]++;
 				}
@@ -89,7 +95,7 @@ int main ()
 
 			case 's':
 				pos[1]++;
-				if (colmap[level][mappos()] == 'r')
+				if (colmap(level, mappos(0)) == 'r')
 				{
 					pos[1]--;
 				}
@@ -97,17 +103,21 @@ int main ()
 
 			case 'd':
 				pos[0]++;
-				if (colmap[level][mappos()] == 'r')
+				if (colmap(level, mappos(0)) == 'r')
 				{
 					pos[0]--;
 				}
+				break;
+				
+			case 'r': // SEECRET
+				SEECRET = 1;
 				break;
 
 			default:
 				break;
 			}
 			
-			if (x == 0x1b || x == 0x03)
+			if (x == 0x1b | x == 0x03)
 			{
 				INThandler();
 			}
@@ -117,8 +127,11 @@ int main ()
 			usleep(waitMS*1000);
 #endif
 		}
-		
-		if (colmap[level][mappos()] == 'g' && basemap[level][mappos()] == '&')
+
+		currentColour = colmap(level, mappos(0));
+		currentTile = basemap(level, mappos(0));
+
+		if (currentColour == 'g' && currentTile == '&')
 		{
 			level++;
 			pos[0] = defpos[0];
@@ -128,7 +141,7 @@ int main ()
 				gameCompleted();
 			}
 		}
-		if (colmap[level][mappos()] == 'R' && basemap[level][mappos()] == '%')
+		if (currentColour == 'R' && currentTile == '%')
 		{
 			coins--;
 			if (coins <= 0)
@@ -137,16 +150,16 @@ int main ()
 				gameOver();
 			}
 		}
-		if (colmap[level][mappos()] == 'g' && basemap[level][mappos()] == '0')
+		if (currentColour == 'g' && currentTile == '0')
 		{
 			coins++;
 		}
 		
 		fflush(stdout);
 #ifdef _WIN32
-		Sleep(20000 / 1000);
+		Sleep(20);
 #else
-		usleep(20000);
+		usleep(20 * 1000);
 #endif
 	}
 	
@@ -161,23 +174,38 @@ int draw ()
 		printf("\033[A");
 	}
 	printf("%s\033[0m\n",map);
-	printf("Coins: %d  \n\033[0;30m", coins);
+	if (SEECRET)
+	{
+		printf("Riley is the best! %d  \n\033[0;30m", coins);
+		SEECRET = 0;
+	}
+	else
+	{
+		printf("Coins: %d  \n\033[0;30m", coins);
+	}
 
 	return 0;
 }
 
 int updatemap ()
 {
-	for (int i=0;i<=LHEIGHT*(LWIDTH+LWinc);i++)
-	{
-		map2[i] = basemap[level][i];
-		colmap2[i] = colmap[level][i];
-	}
-	map2[mappos()] = '@';
-	colmap2[mappos()] = ' ';
-	
 	int j = 0;
-	for (int i=0;i<=LHEIGHT*(LWIDTH+LWinc);i++)
+	for (int i = 0;i <= LHEIGHT*LWIDTH;i++)
+	{
+		map2[i+j] = basemap(level, i);
+		colmap2[i+j] = colmap(level, i);
+		if (i % 8 == 7)
+		{
+			j++;
+			map2[i+j] = '\n';
+			colmap2[i+j] = '\n';
+		}
+	}
+	map2[mappos(1)] = '@';
+	colmap2[mappos(1)] = ' ';
+	
+	j = 0;
+	for (int i=0;i<=LHEIGHT*(LWIDTH+1);i++)
 	{
 		switch (colmap2[i])
 		{
@@ -232,9 +260,9 @@ void INThandler (int sig)
 	stopGame();
 }
 
-int mappos()
+int mappos(int x)
 {
-	return pos[0] + pos[1] * (LWIDTH + LWinc);
+	return pos[0] + pos[1] * (LWIDTH+x);
 }
 
 int gameCompleted()
