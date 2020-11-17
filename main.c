@@ -20,31 +20,27 @@ int gameCompleted(void);
 int stopGame(void);
 void INThandler(int sig);
 
-#ifdef _WIN32
-const int waitMS = 40;
-#else
-const int waitMS = 40;
-#endif
+const unsigned char waitMS = 40;
 
-const int defpos[2] = { 1,1 };
-const int bonuslines = 2;
-const int levelmax = 5;
+const unsigned char defpos[2] = { 1,1 };
+const unsigned char bonuslines = 2;
+const unsigned char levelmax = 5;
 
-char currentTile;
-char currentColour;
+unsigned char currentTile;
+unsigned char currentColour;
 
-unsigned int pos[2] = { 1,1 };
-unsigned int level = 0;
-unsigned int STOP = 0;
-unsigned int STOPCODE = 128;
-unsigned int SEECRET = 0;
-unsigned int p2 = 0;
+unsigned char pos[2] = { 1,1 };
+unsigned char level = 0;
+unsigned char STOP = 0;
+unsigned char STOPCODE = 128;
+unsigned char SEECRET = 0;
+unsigned char p2 = 0;
 
-signed int coins = 0;
+signed long coins = 0;
 
-char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
-char colmap2[72];
-char map[500]; // Size needed unknown.
+unsigned char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
+unsigned char colmap2[72];
+unsigned char map[500]; // Size needed unknown.
 
 int main(int argc, char* argv[])
 {
@@ -190,15 +186,15 @@ int draw(void)
   {
     printf("\033[A");
   }
-  printf("%s\033[0m\n", map);
+  printf("%s\033[0m           \n", map);
   if (SEECRET)
   {
-    printf("Riley is the best! %d  \n\033[0;30m", coins);
+    printf("Riley is the best! %ld  \n\033[0;30m", coins);
     SEECRET = 0;
   }
   else
   {
-    printf("Coins: %d                           \n\033[0;30m", coins);
+    printf("Coins: %ld                           \n\033[0;30m", coins);
   }
 
   return 0;
