@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-unsigned char *get2pPos()
+char *get2pPos()
 {
   FILE *f = fopen("2p.io", "rb");
   fseek(f, 0, SEEK_END);
@@ -16,7 +16,7 @@ unsigned char *get2pPos()
 
   return x;
 }
-unsigned char send1pPos(unsigned char x, unsigned char y)
+int send1pPos(int x, int y)
 {
   FILE *f = fopen("1p.io", "wb");
   fwrite(&x, 1, 1, f);
