@@ -12,16 +12,16 @@
 #include "2Player.c"
 #include "save.c"
 
-int draw(void);
-int updatemap(void);
-int mappos(int x);
-int gameOver(void);
-int gameCompleted(void);
-int stopGame(void);
+unsigned char draw(void);
+unsigned char updatemap(void);
+unsigned char mappos(unsigned char x);
+unsigned char gameOver(void);
+unsigned char gameCompleted(void);
+unsigned char stopGame(void);
+
 void INThandler(int sig);
 
 const unsigned char waitMS = 40;
-
 const unsigned char defpos[2] = { 1,1 };
 const unsigned char bonuslines = 2;
 const unsigned char levelmax = 5;
@@ -42,7 +42,7 @@ unsigned char map2[72]; // LHEIGHT*(LWIDTH+1) (+1 for \n)
 unsigned char colmap2[72];
 unsigned char map[500]; // Size needed unknown.
 
-int main(int argc, char* argv[])
+unsigned char main(int argc, char* argv[])
 {
   p2 = argc;
 #ifdef _WIN32
@@ -50,11 +50,11 @@ int main(int argc, char* argv[])
 #endif
   printf("\033[?25l");
   signal(SIGINT, INThandler);
-  for (int i = 0;i <= LHEIGHT + bonuslines;i++)
+  for (unsigned char i = 0;i <= LHEIGHT + bonuslines;i++)
   {
     printf("\n");
   }
-  char x;
+  unsigned char x;
 
   while (1)
   {
@@ -179,10 +179,10 @@ int main(int argc, char* argv[])
   return 0;
 }
 
-int draw(void)
+unsigned char draw(void)
 {
   printf("\r");
-  for (int i = 0;i < LHEIGHT + bonuslines;i++)
+  for (unsigned char i = 0;i < LHEIGHT + bonuslines;i++)
   {
     printf("\033[A");
   }
@@ -200,10 +200,10 @@ int draw(void)
   return 0;
 }
 
-int updatemap(void)
+unsigned char updatemap(void)
 {
-  int j = 0;
-  for (int i = 0;i <= LHEIGHT * LWIDTH;i++)
+  unsigned short j = 0;
+  for (unsigned char i = 0;i <= LHEIGHT * LWIDTH;i++)
   {
     map2[i + j] = basemap(level, i);
     colmap2[i + j] = colmap(level, i);
@@ -224,7 +224,7 @@ int updatemap(void)
   }
 
   j = 0;
-  for (int i = 0;i <= LHEIGHT * (LWIDTH + 1);i++)
+  for (unsigned char i = 0;i <= LHEIGHT * (LWIDTH + 1);i++)
   {
     switch (colmap2[i])
     {
@@ -279,12 +279,12 @@ void INThandler(int sig)
   stopGame();
 }
 
-int mappos(int x)
+unsigned char mappos(unsigned char x)
 {
   return pos[0] + pos[1] * (LWIDTH + x);
 }
 
-int gameCompleted(void)
+unsigned char gameCompleted(void)
 {
   printf("\n\033[0mGame completed!!!\n");
 #ifdef _WIN32
@@ -297,7 +297,7 @@ int gameCompleted(void)
   return 0;
 }
 
-int gameOver(void)
+unsigned char gameOver(void)
 {
   printf("\n\033[0mGame Over!!!\n");
 #ifdef _WIN32
@@ -311,7 +311,7 @@ int gameOver(void)
 }
 
 
-int stopGame(void)
+unsigned char stopGame(void)
 {
   printf("\033[0m\033[?25h\n");
 #ifdef _WIN32
