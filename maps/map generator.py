@@ -1,4 +1,3 @@
-import random
 basemap = ["""\
 ########\
 ########\
@@ -104,12 +103,12 @@ for x in range(len(basemap)):
     basemap2 += "\",\""
     colmap2 += "\",\""
 
-CSource = "const char basemapVar["+str(len(basemap))+"][500]={\""
+CSource = "const unsigned char basemapVar["+str(len(basemap))+"][500]={\""
 CSource += basemap2[:-3]
-CSource += "\"};const char colmapVar["+str(len(colmap))+"][500]={\""
+CSource += "\"};const unsigned char colmapVar["+str(len(colmap))+"][500]={\""
 CSource += colmap2[:-3]
 CSource += "\"};"
-CSource += "char basemap(unsigned char x,unsigned char y){return basemapVar[x][y];}char colmap(int x,int y){return colmapVar[x][y];}"
+CSource += "unsigned char basemap(unsigned char x, unsigned char y){return basemapVar[x][y];}unsigned char colmap(int x,int y){return colmapVar[x][y];}"
 print(CSource)
 
 file = open(r"maps.c","w")

@@ -1,14 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-char *get2pPos()
+unsigned char *get2pPos()
 {
   FILE *f = fopen("2p.io", "rb");
   fseek(f, 0, SEEK_END);
-  long fsize = ftell(f);
+  unsigned long fsize = ftell(f);
   fseek(f, 0, SEEK_SET);  /* same as rewind(f); */
 
-  char *x = malloc(fsize + 1);
+  unsigned char *x = malloc(fsize + 1);
   fread(x, 1, fsize, f);
   fclose(f);
 
@@ -16,7 +16,7 @@ char *get2pPos()
 
   return x;
 }
-int send1pPos(int x, int y)
+unsigned char send1pPos(unsigned char x, unsigned char y)
 {
   FILE *f = fopen("1p.io", "wb");
   fwrite(&x, 1, 1, f);
