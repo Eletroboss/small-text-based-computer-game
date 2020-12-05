@@ -1,4 +1,4 @@
-<h1>THIS HAS BEEN MIGRATED TO GITLAB. PLEASE GO TO HERE: <a href="gitlab.com/Electroboss/lightweight-text-based-game">https://gitlab.com/Electroboss/lightweight-text-based-game</a></h1>
+<h1>THIS HAS BEEN MIGRATED TO GITLAB. PLEASE GO TO HERE: <a href="https://gitlab.com/Electroboss/lightweight-text-based-game">gitlab.com/Electroboss/lightweight-text-based-game</a></h1>
 <h1>Running</h1>
 <blockquote>Please note that these binaries are compiled for x86_64. You will have to build yourself if you are using a 32-bit machine. For building, see <a href="#building">here</a>.</blockquote>
 <h2>All:</h2>
